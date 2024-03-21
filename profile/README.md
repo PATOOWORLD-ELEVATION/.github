@@ -1,61 +1,270 @@
 ## PATOOWORLD 
 ---
-title: Introduction
-description: Welcome to the Next.js Documentation.
----
+# `node-gyp` - Node.js native addon build tool
 
-Welcome to the Next.js documentation!
+[![Build Status](https://github.com/nodejs/node-gyp/workflows/Tests/badge.svg?branch=main)](https://github.com/nodejs/node-gyp/actions?query=workflow%3ATests+branch%3Amain)
+![npm](https://img.shields.io/npm/dm/node-gyp)
 
-## What is Next.js?
+`node-gyp` is a cross-platform command-line tool written in Node.js for
+compiling native addon modules for Node.js. It contains a vendored copy of the
+[gyp-next](https://github.com/nodejs/gyp-next) project that was previously used
+by the Chromium team and extended to support the development of Node.js native
+addons.
 
-Next.js is a React framework for building full-stack web applications. You use React Components to build user interfaces, and Next.js for additional features and optimizations.
+Note that `node-gyp` is _not_ used to build Node.js itself.
 
-Under the hood, Next.js also abstracts and automatically configures tooling needed for React, like bundling, compiling, and more. This allows you to focus on building your application instead of spending time with configuration.
+All current and LTS target versions of Node.js are supported. Depending on what version of Node.js is actually installed on your system
+`node-gyp` downloads the necessary development files or headers for the target version. List of stable Node.js versions can be found on [Node.js website](https://nodejs.org/en/about/previous-releases).
 
-Whether you're an individual developer or part of a larger team, Next.js can help you build interactive, dynamic, and fast React applications.
+## Features
 
-## Main Features
+ * The same build commands work on any of the supported platforms
+ * Supports the targeting of different versions of Node.js
 
-Some of the main Next.js features include:
+## Installation
 
-| Feature                                                                  | Description                                                                                                                                                                                      |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [Routing](/docs/app/building-your-application/routing)                   | A file-system based router built on top of Server Components that supports layouts, nested routing, loading states, error handling, and more.                                                    |
-| [Rendering](/docs/app/building-your-application/rendering)               | Client-side and Server-side Rendering with Client and Server Components. Further optimized with Static and Dynamic Rendering on the server with Next.js. Streaming on Edge and Node.js runtimes. |
-| [Data Fetching](/docs/app/building-your-application/data-fetching)       | Simplified data fetching with async/await in Server Components, and an extended `fetch` API for request memoization, data caching and revalidation.                                              |
-| [Styling](/docs/app/building-your-application/styling)                   | Support for your preferred styling methods, including CSS Modules, Tailwind CSS, and CSS-in-JS                                                                                                   |
-| [Optimizations](/docs/app/building-your-application/optimizing)          | Image, Fonts, and Script Optimizations to improve your application's Core Web Vitals and User Experience.                                                                                        |
-| [TypeScript](/docs/app/building-your-application/configuring/typescript) | Improved support for TypeScript, with better type checking and more efficient compilation, as well as custom TypeScript Plugin and type checker.                                                 |
+You can install `node-gyp` using `npm`:
 
-## How to Use These Docs
+``` bash
+npm install -g node-gyp
+```
 
-On the left side of the screen, you'll find the docs navbar. The pages of the docs are organized sequentially, from basic to advanced, so you can follow them step-by-step when building your application. However, you can read them in any order or skip to the pages that apply to your use case.
+Depending on your operating system, you will need to install:
 
-On the right side of the screen, you'll see a table of contents that makes it easier to navigate between sections of a page. If you need to quickly find a page, you can use the search bar at the top, or the search shortcut (`Ctrl+K` or `Cmd+K`).
+### On Unix
 
-To get started, checkout the [Installation](/docs/getting-started/installation) guide.
+   * [A supported version of Python](https://devguide.python.org/versions/)
+   * `make`
+   * A proper C/C++ compiler toolchain, like [GCC](https://gcc.gnu.org)
 
-## App Router vs Pages Router
+### On macOS
 
-Next.js has two different routers: the App Router and the Pages Router. The App Router is a newer router that allows you to use React's latest features, such as Server Components and Streaming. The Pages Router is the original Next.js router, which allowed you to build server-rendered React applications and continues to be supported for older Next.js applications.
+   * [A supported version of Python](https://devguide.python.org/versions/)
+   * `Xcode Command Line Tools` which will install `clang`, `clang++`, and `make`.
+     * Install the `Xcode Command Line Tools` standalone by running `xcode-select --install`. -- OR --
+     * Alternatively, if you already have the [full Xcode installed](https://developer.apple.com/xcode/download/), you can install the Command Line Tools under the menu `Xcode -> Open Developer Tool -> More Developer Tools...`.
 
-At the top of the sidebar, you'll notice a dropdown menu that allows you to switch between the **App Router** and the **Pages Router** features. Since there are features that are unique to each directory, it's important to keep track of which tab is selected.
 
-The breadcrumbs at the top of the page will also indicate whether you're viewing App Router docs or Pages Router docs.
+### On Windows
 
-## Pre-Requisite Knowledge
+Install the current [version of Python](https://devguide.python.org/versions/) from the
+[Microsoft Store](https://apps.microsoft.com/store/search?publisher=Python+Software+Foundation).
 
-Although our docs are designed to be beginner-friendly, we need to establish a baseline so that the docs can stay focused on Next.js functionality. We'll make sure to provide links to relevant documentation whenever we introduce a new concept.
+Install tools and configuration manually:
+   * Install Visual C++ Build Environment: For Visual Studio 2019 or later, use the `Desktop development with C++` workload from [Visual Studio Community](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community).  For a version older than Visual Studio 2019, install [Visual Studio Build Tools](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools) with the `Visual C++ build tools` option.
 
-To get the most out of our docs, it's recommended that you have a basic understanding of HTML, CSS, and React. If you need to brush up on your React skills, check out our [React Foundations Course](/learn/react-foundations), which will introduce you to the fundamentals. Then, learn more about Next.js by [building a dashboard application](/learn/dashboard-app).
+   If the above steps didn't work for you, please visit [Microsoft's Node.js Guidelines for Windows](https://github.com/Microsoft/nodejs-guidelines/blob/master/windows-environment.md#compiling-native-addon-modules) for additional tips.
 
-## Accessibility
+   To target native ARM64 Node.js on Windows on ARM, add the components "Visual C++ compilers and libraries for ARM64" and "Visual C++ ATL for ARM64".
 
-For optimal accessibility when using a screen reader while reading the docs, we recommend using Firefox and NVDA, or Safari and VoiceOver.
+   To use the native ARM64 C++ compiler on Windows on ARM, ensure that you have Visual Studio 2022 [17.4 or later](https://devblogs.microsoft.com/visualstudio/arm64-visual-studio-is-officially-here/) installed.
 
-## Join our Community
+It's advised to install following Powershell module: [VSSetup](https://github.com/microsoft/vssetup.powershell) using `Install-Module VSSetup -Scope CurrentUser`.
+This will make Visual Studio detection logic to use more flexible and accessible method, avoiding Powershell's `ConstrainedLanguage` mode.
 
-If you have questions about anything related to Next.js, you're always welcome to ask our community on [GitHub Discussions](https://github.com/vercel/next.js/discussions), [Discord](https://discord.com/invite/bUG2bvbtHy), [Twitter](https://twitter.com/nextjs), and [Reddit](https://www.reddit.com/r/nextjs). 👋
+### Configuring Python Dependency
+
+`node-gyp` requires that you have installed a [supported version of Python](https://devguide.python.org/versions/).
+If you have multiple versions of Python installed, you can identify which version
+`node-gyp` should use in one of the following ways:
+
+1. by setting the `--python` command-line option, e.g.:
+
+``` bash
+node-gyp <command> --python /path/to/executable/python
+```
+
+2. If `node-gyp` is called by way of `npm`, *and* you have multiple versions of
+Python installed, then you can set the `npm_config_python` environment variable
+to the appropriate path:
+``` bash
+export npm_config_python=/path/to/executable/python
+```
+&nbsp;&nbsp;&nbsp;&nbsp;Or on Windows:
+```console
+py --list-paths  # To see the installed Python versions
+set npm_config_python=C:\path\to\python.exe
+```
+
+3. If the `PYTHON` environment variable is set to the path of a Python executable,
+then that version will be used if it is a supported version.
+
+4. If the `NODE_GYP_FORCE_PYTHON` environment variable is set to the path of a
+Python executable, it will be used instead of any of the other configured or
+built-in Python search paths. If it's not a compatible version, no further
+searching will be done.
+
+### Build for Third Party Node.js Runtimes
+
+When building modules for third-party Node.js runtimes like Electron, which have
+different build configurations from the official Node.js distribution, you
+should use `--dist-url` or `--nodedir` flags to specify the headers of the
+runtime to build for.
+
+Also when `--dist-url` or `--nodedir` flags are passed, node-gyp will use the
+`config.gypi` shipped in the headers distribution to generate build
+configurations, which is different from the default mode that would use the
+`process.config` object of the running Node.js instance.
+
+Some old versions of Electron shipped malformed `config.gypi` in their headers
+distributions, and you might need to pass `--force-process-config` to node-gyp
+to work around configuration errors.
+
+## How to Use
+
+To compile your native addon first go to its root directory:
+
+``` bash
+cd my_node_addon
+```
+
+The next step is to generate the appropriate project build files for the current
+platform. Use `configure` for that:
+
+``` bash
+node-gyp configure
+```
+
+Auto-detection fails for Visual C++ Build Tools 2015, so `--msvs_version=2015`
+needs to be added (not needed when run by npm as configured above):
+``` bash
+node-gyp configure --msvs_version=2015
+```
+
+__Note__: The `configure` step looks for a `binding.gyp` file in the current
+directory to process. See below for instructions on creating a `binding.gyp` file.
+
+Now you will have either a `Makefile` (on Unix platforms) or a `vcxproj` file
+(on Windows) in the `build/` directory. Next, invoke the `build` command:
+
+``` bash
+node-gyp build
+```
+
+Now you have your compiled `.node` bindings file! The compiled bindings end up
+in `build/Debug/` or `build/Release/`, depending on the build mode. At this point,
+you can require the `.node` file with Node.js and run your tests!
+
+__Note:__ To create a _Debug_ build of the bindings file, pass the `--debug` (or
+`-d`) switch when running either the `configure`, `build` or `rebuild` commands.
+
+## The `binding.gyp` file
+
+A `binding.gyp` file describes the configuration to build your module, in a
+JSON-like format. This file gets placed in the root of your package, alongside
+`package.json`.
+
+A barebones `gyp` file appropriate for building a Node.js addon could look like:
+
+```python
+{
+  "targets": [
+    {
+      "target_name": "binding",
+      "sources": [ "src/binding.cc" ]
+    }
+  ]
+}
+```
+
+## Further reading
+
+The **[docs](./docs/)** directory contains additional documentation on specific node-gyp topics that may be useful if you are experiencing problems installing or building addons using node-gyp.
+
+Some additional resources for Node.js native addons and writing `gyp` configuration files:
+
+ * ["Going Native" a nodeschool.io tutorial](http://nodeschool.io/#goingnative)
+ * ["Hello World" node addon example](https://github.com/nodejs/node/tree/main/test/addons/hello-world)
+ * [gyp user documentation](https://gyp.gsrc.io/docs/UserDocumentation.md)
+ * [gyp input format reference](https://gyp.gsrc.io/docs/InputFormatReference.md)
+ * [*"binding.gyp" files out in the wild* wiki page](./docs/binding.gyp-files-in-the-wild.md)
+
+## Commands
+
+`node-gyp` responds to the following commands:
+
+| **Command**   | **Description**
+|:--------------|:---------------------------------------------------------------
+| `help`        | Shows the help dialog
+| `build`       | Invokes `make`/`msbuild.exe` and builds the native addon
+| `clean`       | Removes the `build` directory if it exists
+| `configure`   | Generates project build files for the current platform
+| `rebuild`     | Runs `clean`, `configure` and `build` all in a row
+| `install`     | Installs Node.js header files for the given version
+| `list`        | Lists the currently installed Node.js header versions
+| `remove`      | Removes the Node.js header files for the given version
+
+
+## Command Options
+
+`node-gyp` accepts the following command options:
+
+| **Command**                       | **Description**
+|:----------------------------------|:------------------------------------------
+| `-j n`, `--jobs n`                | Run `make` in parallel. The value `max` will use all available CPU cores
+| `--target=v6.2.1`                 | Node.js version to build for (default is `process.version`)
+| `--silly`, `--loglevel=silly`     | Log all progress to console
+| `--verbose`, `--loglevel=verbose` | Log most progress to console
+| `--silent`, `--loglevel=silent`   | Don't log anything to console
+| `debug`, `--debug`                | Make Debug build (default is `Release`)
+| `--release`, `--no-debug`         | Make Release build
+| `-C $dir`, `--directory=$dir`     | Run command in different directory
+| `--make=$make`                    | Override `make` command (e.g. `gmake`)
+| `--thin=yes`                      | Enable thin static libraries
+| `--arch=$arch`                    | Set target architecture (e.g. ia32)
+| `--tarball=$path`                 | Get headers from a local tarball
+| `--devdir=$path`                  | SDK download directory (default is OS cache directory)
+| `--ensure`                        | Don't reinstall headers if already present
+| `--dist-url=$url`                 | Download header tarball from custom URL
+| `--proxy=$url`                    | Set HTTP(S) proxy for downloading header tarball
+| `--noproxy=$urls`                 | Set urls to ignore proxies when downloading header tarball
+| `--cafile=$cafile`                | Override default CA chain (to download tarball)
+| `--nodedir=$path`                 | Set the path to the node source code
+| `--python=$path`                  | Set path to the Python binary
+| `--msvs_version=$version`         | Set Visual Studio version (Windows only)
+| `--solution=$solution`            | Set Visual Studio Solution version (Windows only)
+| `--force-process-config`          | Force using runtime's `process.config` object to generate `config.gypi` file
+
+## Configuration
+
+### Environment variables
+
+Use the form `npm_config_OPTION_NAME` for any of the command options listed
+above (dashes in option names should be replaced by underscores).
+
+For example, to set `devdir` equal to `/tmp/.gyp`, you would:
+
+Run this on Unix:
+
+```bash
+export npm_config_devdir=/tmp/.gyp
+```
+
+Or this on Windows:
+
+```console
+set npm_config_devdir=c:\temp\.gyp
+```
+
+### `npm` configuration for npm versions before v9
+
+Use the form `OPTION_NAME` for any of the command options listed above.
+
+For example, to set `devdir` equal to `/tmp/.gyp`, you would run:
+
+```bash
+npm config set [--global] devdir /tmp/.gyp
+```
+
+**Note:** Configuration set via `npm` will only be used when `node-gyp`
+is run via `npm`, not when `node-gyp` is run directly.
+
+## License
+
+`node-gyp` is available under the MIT license. See the [LICENSE
+file](LICENSE) for details.
+
+@2024 Release by PATOOWORLD <info@patooworld.com>
 
 <!--
 
