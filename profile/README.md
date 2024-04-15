@@ -1,278 +1,270 @@
-## PATOOWORLD 
----
-# `node-gyp` - Node.js native addon build tool
+# Next.js PW UnifiedCloud
 
-[![Build Status](https://github.com/nodejs/node-gyp/workflows/Tests/badge.svg?branch=main)](https://github.com/nodejs/node-gyp/actions?query=workflow%3ATests+branch%3Amain)
-![npm](https://img.shields.io/npm/dm/node-gyp)
+![unlogo](https://github.com/PATOOWORLD-ELEVATION/node.js/assets/114192133/c039bb68-64eb-4b14-919e-40d873dde2b5)
 
-`node-gyp` is a cross-platform command-line tool written in Node.js for
-compiling native addon modules for Node.js. It contains a vendored copy of the
-[gyp-next](https://github.com/nodejs/gyp-next) project that was previously used
-by the Chromium team and extended to support the development of Node.js native
-addons.
 
-Note that `node-gyp` is _not_ used to build Node.js itself.
+## 📚 Features
 
-All current and LTS target versions of Node.js are supported. Depending on what version of Node.js is actually installed on your system
-`node-gyp` downloads the necessary development files or headers for the target version. List of stable Node.js versions can be found on [Node.js website](https://nodejs.org/en/about/previous-releases).
+With this template, you get all the awesomeness you need:
 
-## Features
+- 🏎️ **[Next.js](https://nextjs.org/)** - Fast by default, with config optimized for performance (with **App Directory**)
+- 💅 **[Tailwind CSS](https://tailwindcss.com/)** - A utility-first CSS framework for rapid UI development
+- ✨ **[ESlint](https://eslint.org/)** and **[Prettier](https://prettier.io/)** - For clean, consistent, and error-free code
+- 🛠️ **[Extremely strict TypeScript](https://www.typescriptlang.org/)** - With [`ts-reset`](https://github.com/total-typescript/ts-reset) library for ultimate type safety
+- 📊 **[Bundle analyzer plugin](https://www.npmjs.com/package/@next/bundle-analyzer)** - Keep an eye on your bundle size
+- 🧪 **[Jest](https://jestjs.io/)** and **[React Testing Library](https://testing-library.com/react)** - For rock-solid unit and integration tests
+- 🎭 **[Playwright](https://playwright.dev/)** - Write end-to-end tests like a pro
+- 📕 **[Storybook](https://storybook.js.org/)** - Create, test, and showcase your components
+- 🌬️ **Smoke Testing** and **Acceptance Tests** - For confidence in your deployments
+- 📝 **[Conventional commits git hook](https://www.conventionalcommits.org/)** - Keep your commit history neat and tidy
+- 🔍 **[Observability](https://opentelemetry.io/)** - Open Telemetry integration for seamless monitoring
+- 🎯 **[Absolute imports](https://nextjs.org/docs/advanced-features/module-path-aliases)** - No more spaghetti imports
+- ⚕️ **[Health checks](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)** - Kubernetes-compatible for robust deployments
+- 🧩 **[Radix UI](https://www.radix-ui.com/)** - Headless UI components for endless customization
+- 💎 **[CVA](http://cva.style/)** - Create a consistent, reusable, and atomic design system
+- 🤖 **[Renovate BOT](https://www.whitesourcesoftware.com/free-developer-tools/renovate)** - Auto-updating dependencies, so you can focus on coding
+- 🩹 **[Patch-package](https://www.npmjs.com/package/patch-package)** - Fix external dependencies without losing your mind
+- 📈 **Components coupling and cohesion graph** - A tool for managing component relationships
+- 🚀 **[GitHub Actions](https://github.com/features/actions)** - Pre-configured actions for smooth workflows, including Bundle Size and performance stats
+- 🤖🧠 **[Automated ChatGPT Code Reviews](https://openai.com/chatgpt)** - **Stay on the cutting edge with AI-powered code reviews!**
+- 💯 **Perfect Lighthouse score** - Because performance matters
+- 🚢 **[Semantic Release](https://github.com/semantic-release/semantic-release)** - for automatic changelog
+- 💻 **[T3 Env](https://env.t3.gg/)** - Manage your environment variables with ease
 
- * The same build commands work on any of the supported platforms
- * Supports the targeting of different versions of Node.js
+## Table of Contents
 
-## Installation
+- [Next.js Enterprise Boilerplate](#nextjs-enterprise-boilerplate)
+  - [📚 Features](#-features)
+  - [Table of Contents](#table-of-contents)
+  - [🎯 Getting Started](#-getting-started)
+  - [🚀 Deployment](#-deployment)
+  - [📃 Scripts Overview](#-scripts-overview)
+  - [🔗 Coupling Graph](#-coupling-graph)
+  - [🧪 Testing](#-testing)
+    - [Running Tests](#running-tests)
+    - [Acceptance Tests](#acceptance-tests)
+    - [Smoke Testing](#smoke-testing)
+  - [🎨 Styling and Design System](#-styling-and-design-system)
+    - [CVA - A New Approach to Variants](#cva---a-new-approach-to-variants)
+  - [💾 State Management](#-state-management)
+    - [Zustand](#zustand)
+    - [Jotai](#jotai)
+    - [Recoil](#recoil)
+  - [🤖 ChatGPT Code Review](#-chatgpt-code-review)
+  - [💻 Environment Variables handling](#-environment-variables-handling)
+  - [🤝 Contribution](#-contribution)
+  - [💌 Support](#support)
+  - [📜 License](#-license)
+  - [Contributors](#contributors)
 
-You can install `node-gyp` using `npm`:
+## 🎯 Getting Started
 
-``` bash
-npm install -g node-gyp
+To get started with this boilerplate, follow these steps:
+
+1. Fork & clone repository:
+
+```bash
+## Don't forget to ⭐ star and fork it first :)
+git clone https://github.com/<your_username)/next-enterprise.git
 ```
 
-Depending on your operating system, you will need to install:
+2. Install the dependencies:
 
-### On Unix
-
-   * [A supported version of Python](https://devguide.python.org/versions/)
-   * `make`
-   * A proper C/C++ compiler toolchain, like [GCC](https://gcc.gnu.org)
-
-### On macOS
-
-   * [A supported version of Python](https://devguide.python.org/versions/)
-   * `Xcode Command Line Tools` which will install `clang`, `clang++`, and `make`.
-     * Install the `Xcode Command Line Tools` standalone by running `xcode-select --install`. -- OR --
-     * Alternatively, if you already have the [full Xcode installed](https://developer.apple.com/xcode/download/), you can install the Command Line Tools under the menu `Xcode -> Open Developer Tool -> More Developer Tools...`.
-
-
-### On Windows
-
-Install the current [version of Python](https://devguide.python.org/versions/) from the
-[Microsoft Store](https://apps.microsoft.com/store/search?publisher=Python+Software+Foundation).
-
-Install tools and configuration manually:
-   * Install Visual C++ Build Environment: For Visual Studio 2019 or later, use the `Desktop development with C++` workload from [Visual Studio Community](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community).  For a version older than Visual Studio 2019, install [Visual Studio Build Tools](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools) with the `Visual C++ build tools` option.
-
-   If the above steps didn't work for you, please visit [Microsoft's Node.js Guidelines for Windows](https://github.com/Microsoft/nodejs-guidelines/blob/master/windows-environment.md#compiling-native-addon-modules) for additional tips.
-
-   To target native ARM64 Node.js on Windows on ARM, add the components "Visual C++ compilers and libraries for ARM64" and "Visual C++ ATL for ARM64".
-
-   To use the native ARM64 C++ compiler on Windows on ARM, ensure that you have Visual Studio 2022 [17.4 or later](https://devblogs.microsoft.com/visualstudio/arm64-visual-studio-is-officially-here/) installed.
-
-It's advised to install following Powershell module: [VSSetup](https://github.com/microsoft/vssetup.powershell) using `Install-Module VSSetup -Scope CurrentUser`.
-This will make Visual Studio detection logic to use more flexible and accessible method, avoiding Powershell's `ConstrainedLanguage` mode.
-
-### Configuring Python Dependency
-
-`node-gyp` requires that you have installed a [supported version of Python](https://devguide.python.org/versions/).
-If you have multiple versions of Python installed, you can identify which version
-`node-gyp` should use in one of the following ways:
-
-1. by setting the `--python` command-line option, e.g.:
-
-``` bash
-node-gyp <command> --python /path/to/executable/python
+```bash
+yarn install --frozen-lockfile
 ```
 
-2. If `node-gyp` is called by way of `npm`, *and* you have multiple versions of
-Python installed, then you can set the `npm_config_python` environment variable
-to the appropriate path:
-``` bash
-export npm_config_python=/path/to/executable/python
-```
-&nbsp;&nbsp;&nbsp;&nbsp;Or on Windows:
-```console
-py --list-paths  # To see the installed Python versions
-set npm_config_python=C:\path\to\python.exe
+3. Run the development server:
+
+```bash
+yarn dev
 ```
 
-3. If the `PYTHON` environment variable is set to the path of a Python executable,
-then that version will be used if it is a supported version.
+4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-4. If the `NODE_GYP_FORCE_PYTHON` environment variable is set to the path of a
-Python executable, it will be used instead of any of the other configured or
-built-in Python search paths. If it's not a compatible version, no further
-searching will be done.
+5. This project uses a git hook to enforce [conventional commits](https://github.com/qoomon/git-conventional-commits). To install the git hook, run the following command in the root directory of the project:
 
-### Build for Third Party Node.js Runtimes
-
-When building modules for third-party Node.js runtimes like Electron, which have
-different build configurations from the official Node.js distribution, you
-should use `--dist-url` or `--nodedir` flags to specify the headers of the
-runtime to build for.
-
-Also when `--dist-url` or `--nodedir` flags are passed, node-gyp will use the
-`config.gypi` shipped in the headers distribution to generate build
-configurations, which is different from the default mode that would use the
-`process.config` object of the running Node.js instance.
-
-Some old versions of Electron shipped malformed `config.gypi` in their headers
-distributions, and you might need to pass `--force-process-config` to node-gyp
-to work around configuration errors.
-
-## How to Use
-
-To compile your native addon first go to its root directory:
-
-``` bash
-cd my_node_addon
+```sh
+brew install pre-commit
+pre-commit install -t commit-msg
 ```
 
-The next step is to generate the appropriate project build files for the current
-platform. Use `configure` for that:
+## 🚀 Deployment
 
-``` bash
-node-gyp configure
+Easily deploy your Next.js app with [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=github&utm_campaign=next-enterprise) by clicking the button below:
+
+[![Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/Blazity/next-enterprise)
+
+## 📃 Scripts Overview
+
+The following scripts are available in the `package.json`:
+
+- `dev`: Starts the development server with colorized output
+- `build`: Builds the app for production
+- `start`: Starts the production server
+- `lint`: Lints the code using ESLint
+- `lint:fix`: Automatically fixes linting errors
+- `prettier`: Checks the code for proper formatting
+- `prettier:fix`: Automatically fixes formatting issues
+- `analyze`: Analyzes the bundle sizes for Client, Server and Edge environments
+- `storybook`: Starts the Storybook server
+- `build-storybook`: Builds the Storybook for deployment
+- `test`: Runs unit and integration tests
+- `e2e:headless`: Runs end-to-end tests in headless mode
+- `e2e:ui`: Runs end-to-end tests with UI
+- `format`: Formats the code with Prettier
+- `postinstall`: Applies patches to external dependencies
+- `preinstall`: Ensures the project is installed with Yarn
+- `coupling-graph`: **Generates a coupling and cohesion graph for the components**
+
+## 🔗 Coupling Graph
+
+The `coupling-graph` script is a useful tool that helps visualize the coupling and connections between your project's internal modules. It's built using the [Madge](https://github.com/pahen/madge) library. To generate the graph, simply run the following command:
+
+```bash
+yarn coupling-graph
 ```
 
-Auto-detection fails for Visual C++ Build Tools 2015, so `--msvs_version=2015`
-needs to be added (not needed when run by npm as configured above):
-``` bash
-node-gyp configure --msvs_version=2015
-```
+This will create a `graph.svg` file, which contains a graphical representation of the connections between your components. You can open the file with any SVG-compatible viewer.
 
-__Note__: The `configure` step looks for a `binding.gyp` file in the current
-directory to process. See below for instructions on creating a `binding.gyp` file.
+![graph](https://user-images.githubusercontent.com/28964599/233662744-3ba89713-8466-49cd-9be7-e6fb38191f58.png)
 
-Now you will have either a `Makefile` (on Unix platforms) or a `vcxproj` file
-(on Windows) in the `build/` directory. Next, invoke the `build` command:
+## 🧪 Testing
 
-``` bash
-node-gyp build
-```
+This boilerplate comes with various testing setups to ensure your application's reliability and robustness.
 
-Now you have your compiled `.node` bindings file! The compiled bindings end up
-in `build/Debug/` or `build/Release/`, depending on the build mode. At this point,
-you can require the `.node` file with Node.js and run your tests!
+### Running Tests
 
-__Note:__ To create a _Debug_ build of the bindings file, pass the `--debug` (or
-`-d`) switch when running either the `configure`, `build` or `rebuild` commands.
+- **Unit and integration tests**: Run Jest tests using `yarn test`
+- **End-to-end tests (headless mode)**: Run Playwright tests in headless mode with `yarn e2e:headless`
+- **End-to-end tests (UI mode)**: Run Playwright tests with UI using `yarn e2e:ui`
 
-## The `binding.gyp` file
+<img width="1392" alt="image" src="https://user-images.githubusercontent.com/28964599/233666655-93b7d08b-2fd8-406a-b43c-44d4d96cf387.png">
 
-A `binding.gyp` file describes the configuration to build your module, in a
-JSON-like format. This file gets placed in the root of your package, alongside
-`package.json`.
+### Acceptance Tests
 
-A barebones `gyp` file appropriate for building a Node.js addon could look like:
+To write acceptance tests, we leverage Storybook's [`play` function](https://storybook.js.org/docs/react/writing-stories/play-function#writing-stories-with-the-play-function). This allows you to interact with your components and test various user flows within Storybook.
 
-```python
-{
-  "targets": [
-    {
-      "target_name": "binding",
-      "sources": [ "src/binding.cc" ]
-    }
-  ]
+```ts
+/*
+ * See https://storybook.js.org/docs/react/writing-stories/play-function#working-with-the-canvas
+ * to learn more about using the canvasElement to query the DOM
+ */
+export const FilledForm: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+
+    const emailInput = canvas.getByLabelText("email", {
+      selector: "input",
+    })
+
+    await userEvent.type(emailInput, "example-email@email.com", {
+      delay: 100,
+    })
+
+    const passwordInput = canvas.getByLabelText("password", {
+      selector: "input",
+    })
+
+    await userEvent.type(passwordInput, "ExamplePassword", {
+      delay: 100,
+    })
+    // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
+    const submitButton = canvas.getByRole("button")
+
+    await userEvent.click(submitButton)
+  },
 }
 ```
 
-## Further reading
+### Smoke Testing
 
-The **[docs](./docs/)** directory contains additional documentation on specific node-gyp topics that may be useful if you are experiencing problems installing or building addons using node-gyp.
+In this boilerplate, we use Storybook's out-of-the-box support for smoke testing to verify that components render correctly without any errors. Just run `yarn test-storybook` to perform smoke testing. Remember to write stories in JSX or TSX format only. Smoke testing and a lot of other functionalities dont work well with MDX stories.
 
-Some additional resources for Node.js native addons and writing `gyp` configuration files:
+## 🎨 Styling and Design System
 
- * ["Going Native" a nodeschool.io tutorial](http://nodeschool.io/#goingnative)
- * ["Hello World" node addon example](https://github.com/nodejs/node/tree/main/test/addons/hello-world)
- * [gyp user documentation](https://gyp.gsrc.io/docs/UserDocumentation.md)
- * [gyp input format reference](https://gyp.gsrc.io/docs/InputFormatReference.md)
- * [*"binding.gyp" files out in the wild* wiki page](./docs/binding.gyp-files-in-the-wild.md)
+This boilerplate uses Tailwind CSS for styling and CVA for creating a powerful, easy-to-use design system. If you want to learn more about the setup, check out this fantastic video by Vercel:
 
-## Commands
+[![Styling and Design System](https://img.youtube.com/vi/T-Zv73yZ_QI/0.jpg)](https://www.youtube.com/watch?v=T-Zv73yZ_QI&ab_channel=Vercel)
 
-`node-gyp` responds to the following commands:
+### CVA - A New Approach to Variants
 
-| **Command**   | **Description**
-|:--------------|:---------------------------------------------------------------
-| `help`        | Shows the help dialog
-| `build`       | Invokes `make`/`msbuild.exe` and builds the native addon
-| `clean`       | Removes the `build` directory if it exists
-| `configure`   | Generates project build files for the current platform
-| `rebuild`     | Runs `clean`, `configure` and `build` all in a row
-| `install`     | Installs Node.js header files for the given version
-| `list`        | Lists the currently installed Node.js header versions
-| `remove`      | Removes the Node.js header files for the given version
+While CSS-in-TS libraries such as [Stitches](https://stitches.dev/) and [Vanilla Extract](https://vanilla-extract.style/) are great for building type-safe UI components, they might not be the perfect fit for everyone. You may prefer more control over your stylesheets, need to use a framework like Tailwind CSS, or simply enjoy writing your own CSS.
 
+Creating variants using traditional CSS can be a tedious task, requiring you to manually match classes to props and add types. CVA is here to take that pain away, allowing you to focus on the enjoyable aspects of UI development. By providing an easy and type-safe way to create variants, CVA simplifies the process and helps you create powerful design systems without compromising on the flexibility and control of CSS.
 
-## Command Options
+## 💾 State Management
 
-`node-gyp` accepts the following command options:
+While this boilerplate doesn't include a specific state management library, we believe it's essential for you to choose the one that best suits your project's needs. Here are some libraries we recommend for state management:
 
-| **Command**                       | **Description**
-|:----------------------------------|:------------------------------------------
-| `-j n`, `--jobs n`                | Run `make` in parallel. The value `max` will use all available CPU cores
-| `--target=v6.2.1`                 | Node.js version to build for (default is `process.version`)
-| `--silly`, `--loglevel=silly`     | Log all progress to console
-| `--verbose`, `--loglevel=verbose` | Log most progress to console
-| `--silent`, `--loglevel=silent`   | Don't log anything to console
-| `debug`, `--debug`                | Make Debug build (default is `Release`)
-| `--release`, `--no-debug`         | Make Release build
-| `-C $dir`, `--directory=$dir`     | Run command in different directory
-| `--make=$make`                    | Override `make` command (e.g. `gmake`)
-| `--thin=yes`                      | Enable thin static libraries
-| `--arch=$arch`                    | Set target architecture (e.g. ia32)
-| `--tarball=$path`                 | Get headers from a local tarball
-| `--devdir=$path`                  | SDK download directory (default is OS cache directory)
-| `--ensure`                        | Don't reinstall headers if already present
-| `--dist-url=$url`                 | Download header tarball from custom URL
-| `--proxy=$url`                    | Set HTTP(S) proxy for downloading header tarball
-| `--noproxy=$urls`                 | Set urls to ignore proxies when downloading header tarball
-| `--cafile=$cafile`                | Override default CA chain (to download tarball)
-| `--nodedir=$path`                 | Set the path to the node source code
-| `--python=$path`                  | Set path to the Python binary
-| `--msvs_version=$version`         | Set Visual Studio version (Windows only)
-| `--solution=$solution`            | Set Visual Studio Solution version (Windows only)
-| `--force-process-config`          | Force using runtime's `process.config` object to generate `config.gypi` file
+### Zustand
 
-## Configuration
+[Zustand](https://github.com/pmndrs/zustand) is a small, fast, and scalable state management library. It's designed to be simple and intuitive, making it a great choice for small to medium-sized projects. It's also optimized for bundle size, ensuring minimal impact on your app's performance.
 
-### Environment variables
+### Jotai
 
-Use the form `npm_config_OPTION_NAME` for any of the command options listed
-above (dashes in option names should be replaced by underscores).
+[Jotai](https://github.com/pmndrs/jotai) is an atom-based state management library for React that focuses on providing a minimal and straightforward API. Its atom-based approach allows you to manage your state in a granular way while still being highly optimized for bundle size.
 
-For example, to set `devdir` equal to `/tmp/.gyp`, you would:
+### Recoil
 
-Run this on Unix:
+[Recoil](https://recoiljs.org/) is a state management library developed by Facebook, specifically designed for React applications. By utilizing atoms and selectors, Recoil allows you to efficiently manage state and derived state. Its key benefit is the ability to update components only when the state they're subscribed to changes, reducing unnecessary re-renders and keeping your application fast and efficient. Recoil also offers great developer experience with built-in debugging tools.
 
-```bash
-export npm_config_devdir=/tmp/.gyp
+Choose the library that best fits your requirements and project structure to ensure an efficient state management solution for your application.
+
+## 🤖 ChatGPT Code Review
+
+We've integrated the innovative [ChatGPT Code Review](https://github.com/anc95/ChatGPT-CodeReview) for AI-powered, automated code reviews. This feature provides real-time feedback on your code, helping improve code quality and catch potential issues.
+
+To use ChatGPT Code Review, add an `OPENAI_API_KEY` environment variable with an appropriate key from the OpenAI platform. For setup details, refer to the [Using GitHub Actions](https://github.com/anc95/ChatGPT-CodeReview#using-github-actions) section in the documentation.
+
+## 💻 Environment Variables handling
+
+[T3 Env](https://env.t3.gg/) is a library that provides environmental variables checking at build time, type validation and transforming. It ensures that your application is using the correct environment variables and their values are of the expected type. You’ll never again struggle with runtime errors caused by incorrect environment variable usage.
+
+Config file is located at `env.mjs`. Simply set your client and server variables and import `env` from any file in your project.
+
+```ts
+export const env = createEnv({
+  server: {
+    // Server variables
+    SECRET_KEY: z.string(),
+  },
+  client: {
+    // Client variables
+    API_URL: z.string().url(),
+  },
+  runtimeEnv: {
+    // Assign runtime variables
+    SECRET_KEY: process.env.SECRET_KEY,
+    API_URL: process.env.NEXT_PUBLIC_API_URL,
+  },
+})
 ```
 
-Or this on Windows:
+If the required environment variables are not set, you'll get an error message:
 
-```console
-set npm_config_devdir=c:\temp\.gyp
+```sh
+  ❌ Invalid environment variables: { SECRET_KEY: [ 'Required' ] }
 ```
 
-### `npm` configuration for npm versions before v9
+## 🤝 Contribution
 
-Use the form `OPTION_NAME` for any of the command options listed above.
+Contributions are always welcome! To contribute, please follow these steps:
 
-For example, to set `devdir` equal to `/tmp/.gyp`, you would run:
+1. Fork the repository.
+2. Create a new branch with a descriptive name.
+3. Make your changes, and commit them using the [Conventional Commits](https://www.conventionalcommits.org/) format.
+4. Push your changes to the forked repository.
+5. Create a pull request, and we'll review your changes.
 
-```bash
-npm config set [--global] devdir /tmp/.gyp
-```
+## 📜 License
 
-**Note:** Configuration set via `npm` will only be used when `node-gyp`
-is run via `npm`, not when `node-gyp` is run directly.
+This project is licensed under the MIT License. For more information, see the [LICENSE](./LICENSE) file.
 
-## License
-
-`node-gyp` is available under the MIT license. See the [LICENSE
-file](LICENSE) for details.
-
-@2024 Release by PATOOWORLD <info@patooworld.com>
-
-<!--
-
-**Here are some ideas to get you started:**
-
-🙋‍♀️ A short introduction - what is your organization all about?
-🌈 Contribution guidelines - how can the community get involved?
-👩‍💻 Useful resources - where can the community find your docs? Is there anything else the community should know?
-🍿 Fun facts - what does your team eat for breakfast?
-🧙 Remember, you can do mighty things with the power of [Markdown](https://docs.github.com/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
--->
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      </td>
